@@ -5,8 +5,6 @@ int main(int argc, char** argv) {
     int health = 3;
     int enemy_health = 4;
 
-    printf("%p",(int*) &health);
-
     while (health > 0) {
         printf("Do you want to attack? (y/n)\n");
 

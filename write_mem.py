@@ -32,15 +32,14 @@ flag = False
 choice = 0
 
 while not flag:
-    choice = int(input("\nYou can write to any specified sector if you have write permission for the mem file."/
-    "Specify a writable memory address in hexadecimal:"), 16)
+    choice = int(input("\nYou can write to any specified sector if you have write permission for the mem file. Specify a writable memory address in hexadecimal:\n"), 16)
 
     for sector in mem_sectors:
         if sector[0] <= choice and choice <= sector[1]:
             flag = True
             break
 
-num = bytes([int(input("\nPlease specify the number you want to insert for this byte:"))])
+num = bytes([int(input("\nPlease specify the number you want to insert for this byte:\n"))])
 mem_file.seek(choice)
 mem_file.write(num)
 mem_file.close()

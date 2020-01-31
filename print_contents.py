@@ -17,7 +17,7 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
                     searched_text += to_print + '\n'
                     print(to_print, end='')
                     flag = False
-                to_print = '\n{} '.format(hex(start + i + 1))
+                to_print = '\n{} '.format(hex(start + i))
             elif i % 4 == 0:
                 to_print += '     '
 
@@ -36,6 +36,8 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
         ## Converts search term to integer
         opt_search = int(opt_search)
 
+        state = 0
+
         ## Saves a flag saying whether or not the current line should be printed
         flag = False
         for i in range(0, len(chunk)):
@@ -48,21 +50,25 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
                     searched_text += to_print + '\n'
                     print(to_print)
                     flag = False
-                to_print = '{} '.format(hex(start + i + 1))
+                to_print = '{} '.format(hex(start + i))
 
             ## Show numbers as 4 byte integers by putting chunks together
-            if i % 4 == 0:
+            if state == 0:
                 forged_int += chunk[i]
+                state = 1
+            elif state == 1:
+                forged_int += 256 * chunk[i]
+                state = 2
+            elif state == 2:
+                forged_int += (256 * 256) * chunk[i]
+                state = 3
+            elif state == 3:
+                forged_int += (256 * 256 * 256) * chunk[i]
                 to_print += '{}     '.format(forged_int)
                 if opt_search == forged_int:
                     flag = True
                 forged_int = 0
-            elif i % 3 == 0:
-                forged_int += 256 * chunk[i]
-            elif i % 2 == 0:
-                forged_int += (256 * 256) * chunk[i]
-            elif i % 1 == 0:
-                forged_int += (256 * 256 * 256) * chunk[i]
+                state = 0
 
     elif opt_type == 'c':
         ## Saves the current line to print
@@ -81,7 +87,7 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
                     searched_text += to_print + '\n'
                     print(to_print)
                     flag = False
-                to_print = '{} '.format(hex(start + i + 1))
+                to_print = '{} '.format(hex(start + i))
             elif i % 4 == 0:
                 to_print += '     '
 
