@@ -54,6 +54,7 @@ while(opt_cont == 'y'):
 
     ## Filters through new chunks based on previously narrowed down results
     full_text = printc(opt_type, start, chunk, narrow=True, last_text=full_text)
+
     save_file.write('\n=====================================\n')
     save_file.write(full_text)
 

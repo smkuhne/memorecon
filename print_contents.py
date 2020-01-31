@@ -11,7 +11,7 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
         for i in range(0, len(chunk)):
             if i % 16 == 0:
                 if flag:
-                    if narrow and last_text.find(hex(start + i - 15)) == -1:
+                    if narrow and last_text.find(hex(start + i - 16)) == -1:
                         flag = False
                         continue
                     searched_text += to_print + '\n'
@@ -44,13 +44,13 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
             ## Start new line and print only filtered results
             if i % 16 == 0:
                 if flag:
-                    if narrow and last_text.find(hex(start + i - 15)) == -1:
+                    if narrow and last_text.find(hex(start + i - 16)) == -1:
                         flag = False
-                        continue
-                    searched_text += to_print + '\n'
-                    print(to_print)
-                    flag = False
-                to_print = '{} '.format(hex(start + i))
+                    else:
+                        searched_text += to_print
+                        print(to_print, end='')
+                        flag = False
+                to_print = '\n{} '.format(hex(start + i))
 
             ## Show numbers as 4 byte integers by putting chunks together
             if state == 0:
@@ -81,7 +81,7 @@ def printc(opt_type, start, chunk, narrow=False, last_text=''):
             ## Prints out the line if search result was found
             if i % 16 == 0:
                 if flag:
-                    if narrow and last_text.find(hex(start + i - 15)) == -1:
+                    if narrow and last_text.find(hex(start + i - 16)) == -1:
                         flag = False
                         continue
                     searched_text += to_print + '\n'
