@@ -6,7 +6,7 @@ from sys import byteorder
 from print_contents import printc
 
 if len(sys.argv) != 3:
-    print('Usage: python3 read_mem.py PID filename'); 
+    print('Usage: python3 read_mem.py PID filename') 
     exit(1)
 
 maps_file = open('/proc/{}/maps'.format(sys.argv[1]), 'r')
