@@ -18,9 +18,15 @@ Open another new terminal window or tmux pane and enter the following:
 
 Now take the PID number, typically found in the 2nd column of your game process and copy it or remember it. Then enter the following command, entering your PID number as indicated (without the brackets around it):
 
-`cd .. && python3 read_mem.py <PID> memory.txt`
+`cd .. && sudo ./read_mem.py PID memory.txt`
 
 Follow any further prompts that are given and have fun! If you made a mistake you can always rerun the second part of the above command. And if you're feeling really adventurous, enter some of the other PIDs for processes running on your system.
+
+On certain systems you will be able to have write capabilities to memory. Try and get the memory address of an interesting value in a the game program that I provided and overwrite that address in memory. You will only be able to overwrite singular bytes for now, but that should suffice for most things.
+
+`sudo ./write_mem.py PID`
+
+The PID is necessary in this case to show your writable sectors and to make sure that you aren't going outside of the process that you originally intended to work with.
 
 ## Regarding Responsibility ##
 
